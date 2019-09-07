@@ -9,7 +9,7 @@ public class PageGameMenghitungLuasController {
     public TextField txtWidth;
     public TextField txtRadius;
     public TextField txtHeight;
-    public double keterangan,width,height,radius;
+    public double keterangan=0,width,height,radius;
     public double hasilluas, hasilvolume;
     public double pi = 3.14;
 
@@ -50,35 +50,44 @@ public class PageGameMenghitungLuasController {
     }
 
     public void ActionSubmit(ActionEvent actionEvent) {
-        if(keterangan==1){
-            height = Double.parseDouble(txtHeight.getText());
-            width = Double.parseDouble(txtWidth.getText());
-
-            hasilluas = width*height;
-            hasilvolume = 2*(width+height);
-        }
-        else if(keterangan==2){
-            radius = Double.parseDouble(txtRadius.getText());
-            hasilluas = 4*pi*(Math.pow(radius,2));
-            hasilvolume = (4/3)*pi*(Math.pow(radius,3));
-
+        if(keterangan==0){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Message Error");
+            alert.setContentText("Choose Square/Ball/Tube First");
+            alert.show();
         }
         else{
-            height = Double.parseDouble(txtHeight.getText());
-            radius = Double.parseDouble(txtRadius.getText());
-            hasilluas = 2*pi*radius*(radius+height);
-            hasilvolume = pi*(Math.pow(radius,2))*height;
+            if(keterangan==1){
+                height = Double.parseDouble(txtHeight.getText());
+                width = Double.parseDouble(txtWidth.getText());
+
+                hasilluas = width*height;
+                hasilvolume = 2*(width+height);
+            }
+            else if(keterangan==2){
+                radius = Double.parseDouble(txtRadius.getText());
+                hasilluas = 4*pi*(Math.pow(radius,2));
+                hasilvolume = (4/3)*pi*(Math.pow(radius,3));
+
+            }
+            else{
+                height = Double.parseDouble(txtHeight.getText());
+                radius = Double.parseDouble(txtRadius.getText());
+                hasilluas = 2*pi*radius*(radius+height);
+                hasilvolume = pi*(Math.pow(radius,2))*height;
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Message");
+            alert.setContentText("Surface Area: "+Double.toString(hasilluas)+", Volume: "+Double.toString(hasilvolume));
+
+            alert.show();
+
+            txtRadius.clear();
+            txtLength.clear();
+            txtHeight.clear();
+            txtWidth.clear();
         }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Message");
-        alert.setContentText("Surface Area: "+Double.toString(hasilluas)+", Volume: "+Double.toString(hasilvolume));
-
-        alert.show();
-
-        txtRadius.clear();
-        txtLength.clear();
-        txtHeight.clear();
-        txtWidth.clear();
     }
 }
